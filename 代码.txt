@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<iostream>
+#include<stdlib.h>
+#include<time.h>
+using namespace std;
+int main()
+{
+  int n=1000,star=0,end=0;
+ 
+  int *p=new int[n];
+  srand((unsigned)time(NULL));
+  for(int i=0;i<n;i++)
+  {
+      p[i]=rand()%1000-500;
+  }
+ 
+  for(i=0;i<n;i++)
+  {
+      cout<<p[i]<<" ";
+      if((i+1)%10==0)
+      {
+          cout<<endl;
+      }
+  }
+  int sum=p[0];
+  int max_sum=p[0];
+ 
+  for(int j=1;j<n;j++)
+  {
+      if(sum>0)
+      {
+          if(p[j]>(INT_MAX-sum))
+          {
+              cout<<"int error"<<endl;
+              return 0;
+          }
+          sum=sum+p[j];
+         if(sum>max_sum)
+           {
+               max_sum=sum;
+               end=j;
+           }
+      }
+      else
+      {
+          sum=p[j];
+             if(sum>max_sum)
+             {
+                max_sum=sum;
+                star=j;
+                end=j;
+             }
+      }
+  }
+  cout<<"from "<<star+1<<" to "<<end+1<<endl;
+  cout<<"the sum of the max array:"<<max_sum<<endl;
+  return 0;
+}
